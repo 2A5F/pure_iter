@@ -1,2 +1,2 @@
-# Pure iterator
+# Pure Iterator
 just a toy
