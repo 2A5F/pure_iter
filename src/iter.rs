@@ -79,7 +79,10 @@ pub trait Iter: Sized {
         }
     }
 
-    
+    #[inline]
+    fn collect<U: FromIter<Self::Item>>(self) -> U {
+        FromIter::from_iter(self)
+    }
 
     #[inline]
     fn fold<F, U>(mut self, init: U, mut f: F) -> U
@@ -123,9 +126,16 @@ impl<I: Iter> IntoIter for I {
     }
 }
 
+pub trait FromIter<T> {
+    fn from_iter<I>(iter: I) -> Self
+    where
+        I: Iter<Item = T>;
+}
+
 pub struct IterIterator<I> {
     iter: Option<I>,
 }
+
 impl<I> IterIterator<I> {
     pub(crate) fn new(iter: I) -> Self {
         Self { iter: Some(iter) }
