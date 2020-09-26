@@ -80,6 +80,11 @@ pub trait Iter: Sized {
     }
 
     #[inline]
+    fn bond(self, first: Self::Item) -> Bond<Self> {
+        Bond(self, first)
+    }
+
+    #[inline]
     fn collect<U: FromIter<Self::Item>>(self) -> U {
         FromIter::from_iter(self)
     }

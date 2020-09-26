@@ -1,9 +1,11 @@
+mod bond;
 mod chain;
 mod map;
 mod slice;
 mod step_by;
 mod vec;
 mod zip;
+pub use bond::*;
 pub use chain::*;
 pub use map::*;
 pub use slice::*;
